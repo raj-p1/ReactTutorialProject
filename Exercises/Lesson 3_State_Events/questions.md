@@ -1,0 +1,6 @@
+![Exercie3 A B](image.png)
+![Exercise3 C-F](image-1.png)
+![Exercise3 G H](image-2.png)
+![Exercise3 I J](image-3.png)
+![Exercise3 K](image-4.png)
+![Exercise L M](image-5.png)

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ChatBot</title>
+</head>
+
+<body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src = "https://unpkg.com/supersimpledev/chatbot.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+        function ChatInput({ chatMessages, setChatMessages }) {
+            const [inputText, setInputText] = React.useState('');
+            function saveInputText(event) {
+                setInputText(event.target.value);
+            }
+
+            function sendMessage() {
+                const newChatMessages = [
+                    // Spread Operator that copies the value into a new array 
+                    ...chatMessages,
+                    {
+                        message: inputText,
+                        sender: 'user',
+                        id: crypto.randomUUID()
+                    }
+                ]
+                setChatMessages(newChatMessages);
+
+                const response = Chatbot.getResponse(inputText);
+                setChatMessages([
+                    // Spread Operator that copies the value into a new array 
+                    ...newChatMessages,
+                    {
+                        message: response,
+                        sender: 'robot',
+                        id: crypto.randomUUID()
+                    }
+                ]);
+                
+
+                setInputText('');
+            }
+            return (
+                <>
+                    <input
+                        type="text"
+                        placeholder="Send your message here.."
+                        size="30"
+                        onChange={saveInputText}
+                        value = {inputText}
+                    />
+                    <button onClick={sendMessage}>Send</button>
+                </>
+            );
+        }
+
+        function ChatMessage({ message, sender }) {
+            //This way is the  in {value} props object which destructure the destrusturing below
+
+            //const message = props.message;
+            //const sender = props.sender;
+
+            //This is a destructured version of the above two lines 
+            //const {message, sender} = props;
+
+
+            /* This the long way using if condition and below is the short way using conditional rendering by using && operator.
+            if (sender === "robot") {
+                return (
+                    <div>
+                        <img src="robot.png" alt="ChatBot" width="30" height="30"></img>
+                        {message}
+                    </div>
+                );
+
+            }
+            */
+
+            return (
+                <div>
+                    {sender === "robot" && (
+                        <img src="robot.png" alt="ChatBot" width="30" height="30" />
+                    )}
+                    {message}
+                    {sender === "user" && (
+                        <img src="user.png" alt="ChatBot" width="30" height="30" />
+                    )}
+                </div>
+            );
+        }
+
+        function ChatMessages({ chatMessages }) {
+
+            return (
+                <>
+                    {
+                        chatMessages.map((chatMessages) => {
+                            return (
+                                <ChatMessage
+                                    message={chatMessages.message}
+                                    sender={chatMessages.sender}
+                                    key={chatMessages.id}
+                                />
+                            );
+                        })
+                    }
+                </>
+            );
+
+        }
+        function ChatApp() {
+
+            // Directly destructure array with square brackest.
+            const [chatMessages, setChatMessages] = React.useState([{
+                message: 'hello chatbot',
+                sender: 'user',
+                id: 'id1'
+            }, {
+                message: 'Hello! How can I help you?',
+                sender: 'robot',
+                id: 'id2'
+            }, {
+                message: 'can you get me todays date?',
+                sender: 'user',
+                id: 'id3'
+            }, {
+                message: 'Today is Decemeber 25',
+                sender: 'robot',
+                id: 'id4'
+            }]);
+            //Destruturing the array by using this shortcut
+
+            // const [chatMessages, setChatMessages] = array;
+
+            //Below code without destruccturing.........
+            // const chatMessages = array[0];
+            // const setChatMessages = array[1];
+
+            return (
+                <>
+                    <ChatInput
+                        chatMessages={chatMessages}
+                        setChatMessages={setChatMessages} />
+                    <ChatMessages
+                        chatMessages={chatMessages} />
+
+                </>
+            );
+        }
+
+
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<ChatApp />);
+
+    </script>
+</body>
+
+</html>

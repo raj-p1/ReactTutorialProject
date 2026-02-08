@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>React Basics- Components/Props</title>
+</head>
+
+<body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+        // Exercise 2e: Create a Ecommerce app and one of the products is socks. Create an <App> component that displays  "Cotton Socks", Price: $10.90 and an "Add to cart" button.
+        // Exercise 2f: Continuing from Exercise 2e, Display 2 more products on the website: tennis balls and a Tshirt. Instead of duplicating code,create a <ProductDetails> component
+        //  and use props to make it reusable. Then display 3 <ProductDetails> on the website for socks, tennis balls and a Tshirt.
+
+
+        function ProductDetails({name, price}) {
+            return (
+                <>
+                    <p>{name}</p>
+                    <p>Price: ${price} </p>
+                    <button>Add to Cart</button>
+
+                </>
+            );
+        }
+
+
+        function App() {
+            return (
+                <>
+                    <ProductDetails
+                        name="Cotton Socks"
+                        price="10.90"
+                    />
+                    <ProductDetails
+                        name="Tennis Balls"
+                        price="6.00"
+                    />
+                    <ProductDetails
+                        name="Plain Tshirt"
+                        price="7.99"
+                    />
+
+                </>
+            );
+        }
+
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(App());
+
+    </script>
+</body>
+
+</html>

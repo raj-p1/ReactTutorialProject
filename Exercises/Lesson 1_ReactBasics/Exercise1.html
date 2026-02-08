@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exercise React Basics </title>
+</head>
+
+<body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+        //Exercise 1a Display a Button 
+        const exercise1a = <button>Good Job!</button>;
+        //Exercise 1b Display a Paragraph
+        const exercise1b = <p>My Name is Raj</p>;
+        //Exercise 1c Display Button, Paragraph with 2 lines
+        const exercise1c = (
+            <div>
+                <p>Cotton Socks</p>
+                <p>Price: $10</p>
+                <button>Add to Cart</button>
+            </div>
+        );
+
+        //Exercise 1d, 1e: Buy 1 pack of socks for $10 and 2 Tshirts for $8  each. Using JS calculate total cost and save it in  a variable name productCost and display in console and Website
+        function calculateProductCost(socksPrice, tshirtPrice, tshirtQuantity) {
+            return socksPrice + (tshirtPrice * tshirtQuantity);
+        }
+        const productCost = calculateProductCost(10, 8, 2);
+        console.log("Product Cost: $" + productCost);
+        const exercise1de = <p>Product Cost: ${productCost}</p>;
+
+        //Exercise 1f: With all the cost calculated above add shipping cost of $5, save it in a variable name shippingCost and calculate total cost using JS (productCost + shippingCost) and display results on the website in order of Product Cost, Shipping Cost and Total Cost and add button (place your order).
+
+        const shippingCost = 5;
+        const totalCost = productCost + shippingCost;
+        const exercise1f = <div>
+            <p>Product Cost: $ {productCost}</p>
+            <p>Shipping Cost: $ {shippingCost}</p>
+            <p>Total Cost: $ {totalCost}</p>
+            <button>Place Your Order</button>
+        </div>
+
+        //Exercise 1g: Use external library DsyJS from https://unpkg.com/supersimpledev/dayjs.js and once loaded use code: dayjs().format('MMMM D') to get current date and display result in console.
+        const date = dayjs().format('MMMM D');
+        console.log("Today's Date: " + date);
+
+        //Exercise 1h: Continuing from above, insert date in paragraph and display on website in the format: Today is [Date].
+        const exercise1h = <p>Today is {date}</p>;
+
+        //Exercise 1i: Using DayJS, get the current time using dayjs().fromat('HH:mm:ss') and display on website in the format: Current Time is [Time].
+        const time = dayjs().format('HH:mm:ss');
+        const exercise1i = <p>Current Time is {time}</p>;
+
+        //Exercise 1j: Update the time every second to show current time.
+        const time1 = dayjs().format('HH:mm:ss');
+        const exercise1j = <p>Current Time is  {time1}</p>;
+        
+        
+        const container = document.querySelector('.js-container');
+        //ReactDOM.createRoot(container).render(div);
+        const root = ReactDOM.createRoot(container);
+        root.render(exercise1j);
+
+        setInterval(() => {
+            //Div which renders all the exercises in one as a single component
+            const div = (
+                <div>
+                    <h4>Exercise 1a: Display a Button</h4>
+                    {exercise1a}
+                    <h4>Exercise 1b: Display a Paragraph</h4>
+                    {exercise1b}
+                    <h4>Exercise 1c: Display Button, Paragraph with 2 lines</h4>
+                    {exercise1c}
+                    <h4>Exercise 1d, 1e: Buy 1 pack of socks for $10 and 2 Tshirts for $8  each. Using JS calculate total cost and save it in  a variable name productCost and display in console and Website</h4>
+                    {exercise1de}
+                    <h4>Exercise 1f: With all the cost calculated above add shipping cost of $5, save it in a variable name shippingCost and calculate total cost using JS (productCost + shippingCost) and display results on the website in order of Product Cost, Shipping Cost and Total Cost and add button (place your order).</h4>
+                    {exercise1f}
+                    <h4>Exercise 1g: Use external library DsyJS from https://unpkg.com/supersimpledev/dayjs.js and once loaded use code: dayjs().format('MMMM D') to get current date and display result in console.</h4>
+                    <h4>Exercise 1h: Continuing from above, insert date in paragraph and display on website in the format: Today is [Date].</h4>
+                    {exercise1h}
+                    <h4>Exercise 1i: Using DayJS, get the current time using dayjs().fromat('HH:mm:ss') and display on website in the format: Current Time is [Time].</h4>
+                    {exercise1i}
+                    <h4>Exercise 1j: Update the time every second to show current time.</h4>
+                    <p>Current Time is {dayjs().format('HH:mm:ss')}</p>
+                </div>
+            ); root.render(div);
+        }, 1000);
+
+    </script>
+</body>
+
+</html>
